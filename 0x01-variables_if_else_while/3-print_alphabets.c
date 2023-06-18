@@ -9,10 +9,10 @@
 int main(void)
 {
 	int i;
-	char alp[26] = 'abcdefghijklmnopqrstuvwxyz'
-	char ALP[26] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	char alp[26] = "abcdefghijklmnopqrstuvwxyz"
+	char ALP[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-	for (i = 0; i < 26; i++)
+	for (i = 0; i < 52; i++)
 	{
 		putchar(alp[i]);
 		putchar(APL[i]);
