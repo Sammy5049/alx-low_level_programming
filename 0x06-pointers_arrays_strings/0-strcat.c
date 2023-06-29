@@ -9,7 +9,7 @@
  */
 
 
-char _strcat(char *dest, char *src)
+char *_strcat(char *dest, char *src)
 {
 	int a;
 	int b;
@@ -30,5 +30,6 @@ char _strcat(char *dest, char *src)
 		b++;
 	}
 	dest[a] = '\0';
-		return (dest);
+
+	return (dest);
 }
