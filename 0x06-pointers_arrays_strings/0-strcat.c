@@ -2,7 +2,7 @@
 
 
 /**
- * *_strcat - pointer to concatenate two strings and prints out the result
+ * _strcat - pointer to concatenate two strings and prints out the result
  * @dest: first character to concatenate
  * @src: second character to concatenate
  */
