@@ -2,13 +2,14 @@
 
 
 /**
- * _strcat - pointer to concatenate two strings and prints out the result
+ * _strcat - A function to concatenate two strings and prints out the result
  * @dest: first character to concatenate
  * @src: second character to concatenate
+ * Return: Return dest always
  */
 
 
-char *_strcat(char *dest, char *src)
+char _strcat(char *dest, char *src)
 {
 	int a;
 	int b;
