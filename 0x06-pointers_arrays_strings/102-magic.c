@@ -1,11 +1,5 @@
 #include <stdio.h>
 
-/**
- * main - prints an integer
- *
- * Return: Always 0(Sucess)
- */
-
 int main(void)
 {
 	int n;
