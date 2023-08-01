@@ -27,11 +27,14 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	}
 
 	indNode->n = n;
+	indNode->next = NULL;
 
 	if (idx == 0)
 	{
 		indNode->next = *head;
 		*head = indNode;
+
+		return (indNode);
 	}
 
 	/*check if head is empty*/
@@ -41,15 +44,19 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	}
 
 	/*traverse the node till the end*/
-	for (count = 1; temp != NULL && count < idx; count++)
+	for (count = 0; temp != NULL && count < idx; count++)
 	{
-		temp = temp->next;
+		if (count == idx -1)
+		{
+			  indNode->next = temp->next;
+			  temp->next = indNode;
+
+			   return (indNode);
+		}
+		else
+		{
+			temp = temp->next;
+		}
 	}
-
-	/*point next node to what temp was pointing to*/
-	indNode->next = temp->next;
-
-	/*point temp next to the index node*/
-	temp->next = indNode;
 	return (NULL);
 }
