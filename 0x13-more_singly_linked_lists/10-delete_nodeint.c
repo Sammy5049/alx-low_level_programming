@@ -33,9 +33,9 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 
 
 	/*traverse through the node for deletion*/
-	for (counter = 1; counter < index - 1; counter++)
+	for (counter = 1; counter < index; counter++)
 	{
-		if (temp != NULL || temp->next != NULL)
+		if (temp == NULL || temp->next == NULL)
 		{
 			return (-1);
 		}
