@@ -1,105 +1,103 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdlib.h>	
+#include <stdlib.h>
 
-char *make_buffer(char *doc_file);
-void file_close(int cld);
+char *create_buffer(char *file);
+void close_file(int fd);
 
 /**
- * make_buffer - make 1024 bytes for a buffer.
- * @doc_file: name of file buffer is storing chars for.
+ * create_buffer - gives 1024 bytes for buffer.
+ * @file: The name of the file buffer stors.
  *
- * Return: pointer to newly-allocated buffer.
+ * Return: pointer to new buffer.
  */
-char *make_buffer(char *doc_file)
+char *create_buffer(char *file)
 {
 	char *buf;
 
-	buf = (char *) malloc(sizeof(char) * 1024);
+	buf = malloc(sizeof(char) * 1024);
 
 	if (buf == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: Can not Write to %s\n", doc_file);
-		exit(98);
+		dprintf(STDERR_FILENO,
+			"Error: Can't write to %s\n", file);
+		exit(99);
 	}
 
 	return (buf);
 }
 
-
 /**
- * file_close - func Close the file descriptors.
- * @cld: file descriptor to be closed.
+ * close_file - Close the file descriptors.
+ * @fd: The file descriptor to close.
  */
-void file_close(int cld)
+void close_file(int fd)
 {
-	int cl;
+	int cld;
 
-	cl = close(cld);
+	cld = close(fd);
 
-	if (cl == -1)
+	if (cld == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can not close cld");
-		exit(99);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
 	}
 }
 
-
-
 /**
- * main - Copy the contents ofone file to another file.
- * @argc: The number of argumentsprovided  to the program.
- * @argv: An array of pointers to the arguments.
+ * main - Copy contents of one file to another.
+ * @argc: number of arguments supplied to the program.
+ * @argv: Array of pointers to arguments.
  *
  * Return: 0 on success.
  *
- * Description: when the argument count is incorrect - exit code 98.
- * when file_in does not exist or cannot be read - exit code 99.
- * when file_out cannot be created or written to - exit code 100.
- * when file_out or file_from cannot be closed - exit code 101.
+ * Description: If the  count is incorrect - exit code 97.
+ * If file_from does not exist or cannot be read - exit code 98.
+ * If file_to cannot be created or written to - exit code 99.
+ * If file_to or file_from cannot be closed - exit code 100.
  */
 int main(int argc, char *argv[])
 {
-	int rd, in, out;
+	int from, to, rd, wt;
 	char *buff;
-	int wt;
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_in file_out\n");
-		exit(98);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
 	}
 
-	buff = make_buffer(argv[2]);
-	in = open(argv[1], O_RDONLY);
-	rd = read(in, buff, 1024);
-
-	out = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	buff = create_buffer(argv[2]);
+	from = open(argv[1], O_RDONLY);
+	rd = read(from, buffer, 1024);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
-		if (in == -1 || out == -1)
+		if (from == -1 || rd == -1)
 		{
-			dprintf(STDERR_FILENO, "Error: Can not read file%s\n", argv[1]);
+			dprintf(STDERR_FILENO,
+				"Error: Can't read from file %s\n", argv[1]);
+			free(buff);
+			exit(98);
+		}
+
+		wt = write(to, buff, rd);
+		if (to == -1 || wr == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
 			free(buff);
 			exit(99);
 		}
 
-		wt = write(out, buff, rd);
-		if (out == -1 || wt == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can not write to %s\n", argv[2]);
-			free(buff);
-			exit(100);
-		}
+		rd = read(from, buff, 1024);
+		to = open(argv[2], O_WRONLY | O_APPEND);
 
-		rd = read(in, buff, 1024);
-		out = open(argv[2], O_WRONLY | O_APPEND);
 	} while (rd > 0);
 
 	free(buff);
-	file_close(in);
-	file_close(out);
+	close_file(from);
+	close_file(to);
 
 	return (0);
-
 }
