@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
 {
 	size_t count, count2;
 	size_t size, add;
-	char *letter = "A-CHRDw87lNS0E9B2TibgpnMVys5Xzvt
-		OGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
+	char *letter = "A-CHRDw87lNS0E9B2TibgpnMVys5Xzvt"
+		      "OGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
 	char p[7] = "      ";
 
 	if (argc != 2)
