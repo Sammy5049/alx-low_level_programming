@@ -19,13 +19,23 @@ int mul(int a, int b)
 }
 
 
-int _div(int a, int b)
+int my_div(int a, int b)
 {
+	if (b == 0)
+	{
+		printf("Error: Division by zero!\n");
+        	return 0;
+	}
 	return (a / b);
 }
 
 
 int mod(int a, int b)
 {
+	if (b == 0)
+        {
+                printf("Error: Modulus by zero!\n");
+                return 0;
+        }
 	return (a % b);
 }
